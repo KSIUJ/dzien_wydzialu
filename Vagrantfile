@@ -42,7 +42,7 @@ Vagrant.configure(2) do |config|
     echo "export WORKON_HOME=/home/vagrant/.virtualenvs" >> /home/vagrant/.bashrc
     echo "source /usr/share/virtualenvwrapper/virtualenvwrapper.sh" >> /home/vagrant/.bashrc
     
-    mkvirtualenv -p /usr/bin/python3.4 dzien_wydzialu
+    # mkvirtualenv -p /usr/bin/python3.4 dzien_wydzialu
     # cd /vagrant
     # pip install -r requirements.txt
   SHELL
