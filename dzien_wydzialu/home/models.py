@@ -23,6 +23,9 @@ class Activity(models.Model):
     room = models.ForeignKey(Room)
     description = models.TextField(max_length=3000)
 
+    class Meta:
+        verbose_name_plural = "Activities"
+
 
 class Group(models.Model):
     pass
