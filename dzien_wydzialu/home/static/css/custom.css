@@ -89,3 +89,7 @@ fieldset[disabled] .btn-primary.active {
   color: #0066CC;
 }
 
+.portfolio-box .portfolio-box-caption {
+  background: rgba(0, 102, 204, 0.7);
+}
+
