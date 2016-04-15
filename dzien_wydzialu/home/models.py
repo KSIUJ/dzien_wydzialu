@@ -33,3 +33,11 @@ class Event(models.Model):
     end_time = models.TimeField()
     activity = models.ForeignKey(Activity, null=True, blank=True)
     group = models.ForeignKey(Group)
+
+
+class School(models.Model):
+    name = models.CharField(max_length=250)
+    postal_code=models.CharField(max_length=6)
+    city = models.CharField(max_length=100)
+    street = models.CharField(max_length=100)
+    number = models.PositiveSmallIntegerField()
