@@ -6,7 +6,7 @@ class Room(models.Model):
     projector = models.BooleanField()
     board = models.BooleanField()
     computers = models.PositiveSmallIntegerField()
-    info = models.TextField(max_length=3000)
+    info = models.TextField(max_length=3000, blank=True)
     seats = models.PositiveSmallIntegerField()
 
 
