@@ -1,0 +1,91 @@
+﻿html,
+
+
+hr {
+  border-color: 0066CC;
+}
+
+a {
+  color: 0066CC;
+}
+
+.bg-primary {
+  background-color: 0066CC;
+}
+
+.navbar-default .navbar-header .navbar-brand {
+  color: 0066CC;
+}
+
+
+.navbar-default .nav > li > a:hover,
+.navbar-default .nav > li > a:focus:hover {
+  color: 0066CC;
+}
+.navbar-default .nav > li.active > a,
+.navbar-default .nav > li.active > a:focus {
+  color: 0066CC !important;
+}
+
+@media (min-width: 768px) {
+ 
+  .navbar-default.affix .navbar-header .navbar-brand {
+    color: 0066CC;
+  }
+  .navbar-default.affix .nav > li > a:hover,
+  .navbar-default.affix .nav > li > a:focus:hover {
+    color: 0066CC;
+  }
+}
+
+
+
+
+.text-primary {
+  color: 0066CC;
+}
+
+
+
+
+.btn-primary {
+ 
+  background-color: 0066CC;
+  border-color: 0066CC;
+ 
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-color: 0066CC;
+  border-color: 0066CC;
+}
+
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary.focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+  background-color: 0066CC;
+  border-color: 0066CC;
+}
+.btn-primary .badge {
+  color: 0066CC;
+}
+
