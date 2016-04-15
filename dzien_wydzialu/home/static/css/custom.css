@@ -93,3 +93,7 @@ fieldset[disabled] .btn-primary.active {
   background: rgba(0, 102, 204, 0.7);
 }
 
+header {
+  background-image: url('../img/h.jpg');
+}
+
