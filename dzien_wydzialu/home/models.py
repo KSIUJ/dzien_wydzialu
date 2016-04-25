@@ -28,7 +28,9 @@ class Activity(models.Model):
 
 
 class Group(models.Model):
-    pass
+
+    def __str__(self):
+        return str(self.id)
 
 
 class Event(models.Model):
@@ -40,7 +42,7 @@ class Event(models.Model):
 
 class School(models.Model):
     name = models.CharField(max_length=250)
-    postal_code=models.CharField(max_length=6)
+    postal_code = models.CharField(max_length=6)
     city = models.CharField(max_length=100)
     street = models.CharField(max_length=100)
     number = models.PositiveSmallIntegerField()
