@@ -1,5 +1,5 @@
 from django.contrib import admin
-from dzien_wydzialu.home.models import Room, Lecturer, Activity, Event, Group, School
+from dzien_wydzialu.home.models import Room, Lecturer, Activity, Event, Group, School, Profile
 
 
 @admin.register(Room)
@@ -30,3 +30,8 @@ class GroupAdmin(admin.ModelAdmin):
 @admin.register(School)
 class SchoolAdmin(admin.ModelAdmin):
     list_display = ['name']
+
+
+@admin.register(Profile)
+class ProfilelAdmin(admin.ModelAdmin):
+    list_display = ('user','role', 'school')

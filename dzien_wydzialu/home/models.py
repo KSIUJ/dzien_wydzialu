@@ -1,4 +1,6 @@
 from django.db import models
+from registration.signals import user_registered
+from django.contrib.auth.models import User
 
 
 class Room(models.Model):
@@ -48,9 +50,23 @@ class School(models.Model):
     number = models.PositiveSmallIntegerField()
 
 
+    def __str__(self):
+        return self.name
+
+
 class Profile(models.Model):
     Teacher = 'T'
     Coordinator = 'C'
     Roles = ((Teacher, 'Nauczyciel'),(Coordinator, 'Koordynator'))
+    user = models.ForeignKey(User)
     school = models.ForeignKey(School)
     role = models.CharField(max_length=50, choices=Roles, default=Teacher)
+
+ 
+def user_registered_callback(sender, user, request, **kwargs):
+    profile = Profile(user=user)
+    school_id = request.POST.get('school')
+    profile.school = School.objects.get(pk=school_id)
+    profile.save()
+
+user_registered.connect(user_registered_callback)
