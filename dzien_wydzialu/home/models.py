@@ -46,3 +46,11 @@ class School(models.Model):
     city = models.CharField(max_length=100)
     street = models.CharField(max_length=100)
     number = models.PositiveSmallIntegerField()
+
+
+class Profile(models.Model):
+    Teacher = 'T'
+    Coordinator = 'C'
+    Roles = ((Teacher, 'Nauczyciel'),(Coordinator, 'Koordynator'))
+    school = models.ForeignKey(School)
+    role = models.CharField(max_length=50, choices=Roles, default=Teacher)
