@@ -6,8 +6,9 @@ from dzien_wydzialu.home.forms import ExRegistrationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index),
+    url(r'^$', views.index, name='homepage'),
     url(r'^program/$', views.program, name='program'),
+    url(r'^gallery/$', views.gallery, name='gallery'),
     url(r'^accounts/register/$', RegistrationView.as_view(form_class = ExRegistrationForm), name = 'registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
 ]

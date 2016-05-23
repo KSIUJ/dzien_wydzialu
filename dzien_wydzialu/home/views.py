@@ -11,3 +11,7 @@ def program(request):
     return render(request, "home/program.html", {
                   'groups': groups,
                   })
+
+
+def gallery(request):
+    return render(request, "home/gallery.html", {})
