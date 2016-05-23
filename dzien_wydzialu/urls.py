@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='homepage'),
     url(r'^program/$', views.program, name='program'),
+    url(r'^program/group/(?P<group_id>\d+)', views.get_group_pdf, name='group_pdf'),
     url(r'^gallery/$', views.gallery, name='gallery'),
     url(r'^accounts/register/$', RegistrationView.as_view(form_class = ExRegistrationForm), name = 'registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),

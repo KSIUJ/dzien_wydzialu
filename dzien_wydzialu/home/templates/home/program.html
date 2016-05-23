@@ -43,7 +43,9 @@
                 <hr class="light">
                 {% for group in groups %}
                 <div style="display: inline-block; width: 256px; margin: 20px">
-                    <h3>Grupa #{{ group.pk }}</h3>
+                    <a href="{% url 'group_pdf' group.id %}">
+                        <h3>Grupa #{{ group.pk }}</h3>
+                    </a>
                     <hr>
                     {% for event in group.event_set.all %}
                         <div>

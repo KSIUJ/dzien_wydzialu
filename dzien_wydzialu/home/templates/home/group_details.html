@@ -1,0 +1,6 @@
+{{ group.id }}
+<hr>
+{% for event in group.event_set.all %}
+    {{ event.activity.title }}
+    <br>
+{% endfor %}
