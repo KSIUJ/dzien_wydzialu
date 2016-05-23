@@ -16,111 +16,165 @@
 - model: home.group
   pk: 6
   fields: {}
+- model: home.room
+  pk: 1
+  fields: {number: 1, projector: true, board: true, computers: 1, info: '', seats: 200}
+- model: home.lecturer
+  pk: 1
+  fields: {name: Test, surname: Testowy, degree: dr}
+- model: home.activity
+  pk: 1
+  fields:
+    title: "Wykład #1"
+    is_lecture: true
+    room: 1
+    description: Test
+    lecturer: [1]
+- model: home.activity
+  pk: 2
+  fields:
+    title: "Wykład #2"
+    is_lecture: true
+    room: 1
+    description: Test
+    lecturer: [1]
+- model: home.activity
+  pk: 3
+  fields:
+    title: "Warsztat #1"
+    is_lecture: false
+    room: 1
+    description: Test
+    lecturer: [1]
+- model: home.activity
+  pk: 4
+  fields:
+    title: "Warsztat #2"
+    is_lecture: false
+    room: 1
+    description: Test
+    lecturer: [1]
+- model: home.activity
+  pk: 5
+  fields:
+    title: "Warsztat #3"
+    is_lecture: false
+    room: 1
+    description: Test
+    lecturer: [1]
+- model: home.activity
+  pk: 6
+  fields:
+    title: "Warsztat #4"
+    is_lecture: false
+    room: 1
+    description: Test
+    lecturer: [1]
 - model: home.event
   pk: 2
-  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: null, group: 1}
+  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: 1, group: 1}
 - model: home.event
   pk: 3
-  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: null, group: 1}
+  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: 2, group: 1}
 - model: home.event
   pk: 4
-  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: null, group: 1}
+  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: 3, group: 1}
 - model: home.event
   pk: 5
-  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: null, group: 1}
+  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: 4, group: 1}
 - model: home.event
   pk: 6
-  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: null, group: 1}
+  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: 5, group: 1}
 - model: home.event
   pk: 7
-  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: null, group: 1}
+  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: 6, group: 1}
 - model: home.event
   pk: 8
-  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: null, group: 2}
+  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: 1, group: 2}
 - model: home.event
   pk: 9
-  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: null, group: 2}
+  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: 2, group: 2}
 - model: home.event
   pk: 10
-  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: null, group: 2}
+  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: 4, group: 2}
 - model: home.event
   pk: 11
-  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: null, group: 2}
+  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: 5, group: 2}
 - model: home.event
   pk: 12
-  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: null, group: 2}
+  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: 6, group: 2}
 - model: home.event
   pk: 13
-  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: null, group: 2}
+  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: 3, group: 2}
 - model: home.event
   pk: 15
-  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: null, group: 3}
+  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: 1, group: 3}
 - model: home.event
   pk: 16
-  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: null, group: 3}
+  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: 2, group: 3}
 - model: home.event
   pk: 17
-  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: null, group: 3}
+  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: 5, group: 3}
 - model: home.event
   pk: 18
-  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: null, group: 3}
+  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: 6, group: 3}
 - model: home.event
   pk: 19
-  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: null, group: 2}
+  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: 3, group: 3}
 - model: home.event
   pk: 20
-  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: null, group: 3}
+  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: 4, group: 3}
 - model: home.event
   pk: 21
-  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: null, group: 4}
+  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: 1, group: 4}
 - model: home.event
   pk: 22
-  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: null, group: 4}
+  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: 2, group: 4}
 - model: home.event
   pk: 23
-  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: null, group: 4}
+  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: 6, group: 4}
 - model: home.event
   pk: 24
-  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: null, group: 4}
+  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: 3, group: 4}
 - model: home.event
   pk: 25
-  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: null, group: 4}
+  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: 4, group: 4}
 - model: home.event
   pk: 26
-  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: null, group: 4}
+  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: 5, group: 4}
 - model: home.event
   pk: 27
-  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: null, group: 5}
+  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: 1, group: 5}
 - model: home.event
   pk: 28
-  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: null, group: 5}
+  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: 2, group: 5}
 - model: home.event
   pk: 29
-  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: null, group: 5}
+  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: 3, group: 5}
 - model: home.event
   pk: 30
-  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: null, group: 5}
+  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: 4, group: 5}
 - model: home.event
   pk: 31
-  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: null, group: 5}
+  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: 5, group: 5}
 - model: home.event
   pk: 32
-  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: null, group: 5}
+  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: 6, group: 5}
 - model: home.event
   pk: 33
-  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: null, group: 6}
+  fields: {start_time: '09:00:00', end_time: '09:30:00', activity: 1, group: 6}
 - model: home.event
   pk: 34
-  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: null, group: 6}
+  fields: {start_time: '09:30:00', end_time: '10:00:00', activity: 2, group: 6}
 - model: home.event
   pk: 35
-  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: null, group: 6}
+  fields: {start_time: '10:00:00', end_time: '10:30:00', activity: 4, group: 6}
 - model: home.event
   pk: 36
-  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: null, group: 6}
+  fields: {start_time: '10:30:00', end_time: '11:00:00', activity: 5, group: 6}
 - model: home.event
   pk: 37
-  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: null, group: 6}
+  fields: {start_time: '11:00:00', end_time: '11:30:00', activity: 6, group: 6}
 - model: home.event
   pk: 38
-  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: null, group: 6}
+  fields: {start_time: '11:30:00', end_time: '12:00:00', activity: 3, group: 6}

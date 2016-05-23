@@ -49,7 +49,6 @@ class School(models.Model):
     street = models.CharField(max_length=100)
     number = models.PositiveSmallIntegerField()
 
-
     def __str__(self):
         return self.name
 
@@ -57,12 +56,13 @@ class School(models.Model):
 class Profile(models.Model):
     Teacher = 'T'
     Coordinator = 'C'
-    Roles = ((Teacher, 'Nauczyciel'),(Coordinator, 'Koordynator'))
+    Roles = ((Teacher, 'Nauczyciel'),
+             (Coordinator, 'Koordynator'))
     user = models.ForeignKey(User)
     school = models.ForeignKey(School)
     role = models.CharField(max_length=50, choices=Roles, default=Teacher)
 
- 
+
 def user_registered_callback(sender, user, request, **kwargs):
     profile = Profile(user=user)
     school_id = request.POST.get('school')

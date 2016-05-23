@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from dzien_wydzialu.home.models import Group
 
 
 def index(request):
@@ -6,4 +7,7 @@ def index(request):
 
 
 def program(request):
-    return render(request, "home/program.html", {})
+    groups = Group.objects.all()
+    return render(request, "home/program.html", {
+                  'groups': groups,
+                  })
