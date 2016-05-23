@@ -17,7 +17,7 @@ Vagrant.configure(2) do |config|
   #
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
-    # vb.gui = true
+    vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
-    sudo apt-get install -y python3-pip python3-dev virtualenv virtualenvwrapper nginx postgresql postgresql-contrib libpq-dev libjpeg-dev
+    sudo apt-get install -y python3-pip python3-dev virtualenv virtualenvwrapper nginx postgresql postgresql-contrib libpq-dev libjpeg-dev libxml2-dev libxslt-dev python-dev lib32z1-dev libffi-dev
     sudo sed -e 's/peer/trust/g' /etc/postgresql/9.4/main/pg_hba.conf | sudo tee /etc/postgresql/9.4/main/pg_hba.conf.tmp > /dev/null
     sudo mv /etc/postgresql/9.4/main/pg_hba.conf.tmp /etc/postgresql/9.4/main/pg_hba.conf
     sudo sed -e 's/md5/trust/g' /etc/postgresql/9.4/main/pg_hba.conf | sudo tee /etc/postgresql/9.4/main/pg_hba.conf.tmp > /dev/null
