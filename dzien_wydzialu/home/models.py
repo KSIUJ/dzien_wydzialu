@@ -63,6 +63,10 @@ class Profile(models.Model):
     role = models.CharField(max_length=50, choices=Roles, default=Teacher)
 
 
+class Image(models.Model):
+    image_file=models.ImageField(upload_to='dzien_wydzialu/home/static/images')
+
+
 def user_registered_callback(sender, user, request, **kwargs):
     profile = Profile(user=user)
     school_id = request.POST.get('school')
@@ -70,3 +74,6 @@ def user_registered_callback(sender, user, request, **kwargs):
     profile.save()
 
 user_registered.connect(user_registered_callback)
+
+
+

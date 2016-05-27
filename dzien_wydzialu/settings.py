@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'registration',
     'django.contrib.sites',
     'crispy_forms',
+    'dzien_wydzialu',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -89,6 +90,10 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+MEDIA_ROOT = ''
+MEDIA_URL = ''
+
 
 
 # Password validation

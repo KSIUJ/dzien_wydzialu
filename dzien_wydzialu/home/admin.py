@@ -1,5 +1,5 @@
 from django.contrib import admin
-from dzien_wydzialu.home.models import Room, Lecturer, Activity, Event, Group, School, Profile
+from dzien_wydzialu.home.models import Room, Lecturer, Activity, Event, Group, School, Profile, Image
 
 
 @admin.register(Room)
@@ -35,3 +35,8 @@ class SchoolAdmin(admin.ModelAdmin):
 @admin.register(Profile)
 class ProfilelAdmin(admin.ModelAdmin):
     list_display = ('user','role', 'school')
+
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['id']
