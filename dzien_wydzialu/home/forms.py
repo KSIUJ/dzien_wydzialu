@@ -2,15 +2,45 @@ from registration.forms import RegistrationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
-from django.contrib.auth.forms import authenticate
+from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from dzien_wydzialu.home.models import School
+from django.forms.widgets import PasswordInput, TextInput
 
- 
+
+def validate_password_strength(value2):
+    # here we can do everythin connected with validate password, we can change minimum lenght
+    # number of digits in password , whatever we want
+    min_length = 8
+
+    if len(value2) < min_length:
+        raise ValidationError(_('Hasło jest za krótkie.').format(min_length))
+
+
+    return value2
+
+class ExAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(label=_("Nazwa użytkownika"),max_length=254, error_messages={'required': 'To pole jest wymagane.'})
+    password = forms.CharField(label=_("Hasło"), strip=False, widget=forms.PasswordInput, error_messages={'required': 'To pole jest wymagane.'})
+
+    error_messages = {
+        'invalid_login': _("Proszę wprowadzić prawidłową nazwę użytkownika i hasło."),
+        'inactive': _("To konto jest nieaktywne."),
+        'required': _("to jest wymagane")
+    }
+
 class ExRegistrationForm(RegistrationForm):
     school = forms.ModelChoiceField(queryset = School.objects.all())
-
-
+    #overwrited method for password check
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+        return validate_password_strength(self.cleaned_data['password2'])
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
