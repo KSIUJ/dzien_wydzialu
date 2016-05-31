@@ -1,72 +1,38 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block navbar %}
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+<div class="container-fluid">
+
+	<div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="{% url "home.views.index" %}">Strona glowna</a>
+            </div>
+	</div>
+</div>
+</nav>
+</nav>
+{% endblock %}
+
+
 {% block content %}
-<section class="no-padding" id="gallery">
+<section id="gallery">
     <div class="container-fluid">
         <div class="row no-gutter">
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-        </div>
-        <div class="row no-gutter">
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
+                {% for i in images %}
+                <div class="col-lg-2">
+                    <a data-toggle="modal" data-target="#myModal">
+                        <img src="{% static i.image_file.url %}" class="img-responsive thumbnail" alt="">
+                    </a>
+                </div>
+         
+                {% endfor %}
         </div>
     </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -89,8 +55,8 @@
 <style>
 .thumbnail {
     height: auto; 
-    width: auto; 
-    max-width: 300px; 
+    width: auto;
+    max-width: 220px; 
     max-height: 300px;
 }
 </style>

@@ -91,7 +91,7 @@ DATABASES = {
     }
 }
 
-MEDIA_ROOT = ''
+MEDIA_ROOT = 'dzien_wydzialu/home/static'
 MEDIA_URL = ''
 
 

@@ -64,7 +64,7 @@ class Profile(models.Model):
 
 
 class Image(models.Model):
-    image_file=models.ImageField(upload_to='dzien_wydzialu/home/static/images')
+    image_file=models.ImageField(upload_to='images')
 
 
 def user_registered_callback(sender, user, request, **kwargs):

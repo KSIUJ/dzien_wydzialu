@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from dzien_wydzialu.home.models import Group
+from dzien_wydzialu.home.models import Group, Image
 from django.template.loader import get_template
 from django.template import RequestContext
 from django.http import HttpResponse
@@ -21,8 +21,9 @@ def program(request):
 
 
 def gallery(request):
-    return render(request, "home/gallery.html", {})
-
+    images = Image.objects.all()
+    return render(request, "home/gallery.html",{"images":images})
+       
 
 def get_group_pdf(request, group_id):
     html_template = get_template('home/group_details.html')
