@@ -67,7 +67,7 @@ class Profile(models.Model):
     Coordinator = 'C'
     Roles = ((Teacher, 'Nauczyciel'),
              (Coordinator, 'Koordynator'))
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     school = models.ForeignKey(School)
     role = models.CharField(max_length=50, choices=Roles, default=Teacher)
 
@@ -83,3 +83,12 @@ def user_registered_callback(sender, user, request, **kwargs):
     profile.save()
 
 user_registered.connect(user_registered_callback)
+
+
+class VisitorGroup(models.Model):
+    profile = models.CharField(max_length=100)
+    info = models.TextField(max_length=3000, blank=True)
+    caretaker = models.ForeignKey(User)
+
+    def __str__(self):
+        return str(self.id)
