@@ -1,11 +1,11 @@
-from registration.forms import RegistrationForm
-from django.contrib.auth.forms import UserCreationForm
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
-from dzien_wydzialu.home.models import School
-from django.forms.widgets import PasswordInput, TextInput
+from dzien_wydzialu.home.models import School, VisitorGroup
+from registration.forms import RegistrationForm
 
 
 def validate_password_strength(value2):
@@ -15,9 +15,8 @@ def validate_password_strength(value2):
 
     if len(value2) < min_length:
         raise ValidationError(_('Hasło jest za krótkie.').format(min_length))
-
-
     return value2
+
 
 class ExAuthenticationForm(AuthenticationForm):
     username = forms.CharField(label=_("Nazwa użytkownika"),max_length=254, error_messages={'required': 'To pole jest wymagane.'})
@@ -63,4 +62,16 @@ class ExRegistrationForm(RegistrationForm):
                                'password_too_short': 'To nie dziła bez tego importa co go nie moge znalezc'}
 
 
+class VisitorGroupForm(forms.ModelForm):
+    class Meta:
+        model = VisitorGroup
+        fields = ['profile', 'info']
 
+    def __init__(self, *args, **kwargs):
+        super(VisitorGroupForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'newVisitorGroupForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'submit_survey'
+        self.helper.add_input(Submit('submit', 'Submit'))

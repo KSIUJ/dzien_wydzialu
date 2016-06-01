@@ -4,7 +4,9 @@ from django.template.loader import get_template
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from dzien_wydzialu.home.forms import VisitorGroupForm
 
 from weasyprint import HTML, CSS
 
@@ -22,8 +24,8 @@ def program(request):
 
 def gallery(request):
     images = Image.objects.all()
-    return render(request, "home/gallery.html",{"images":images})
-       
+    return render(request, "home/gallery.html", {"images": images})
+
 
 def get_group_pdf(request, group_id):
     html_template = get_template('home/group_details.html')
@@ -32,10 +34,27 @@ def get_group_pdf(request, group_id):
     ctx = RequestContext(request, {'group': group})
     rendered_html = html_template.render(ctx).encode(encoding="UTF-8")
 
-    stylesheet = CSS(settings.BASE_DIR + '/dzien_wydzialu/home' + static('css/custom.css'))
+    stylesheet = CSS(settings.BASE_DIR + '/dzien_wydzialu/home' +
+                     static('css/custom.css'))
     pdf_file = HTML(string=rendered_html).write_pdf(stylesheets=[stylesheet])
 
     http_response = HttpResponse(pdf_file, content_type='application/pdf')
     http_response['Content-Disposition'] = 'filename="report.pdf"'
 
     return http_response
+
+
+@login_required
+def visitorgroup_index(request):
+    visitorgroups = request.user.visitorgroup_set.all()
+    return render(request, "home/visitorgroup_index.html", {
+                  'visitorgroups': visitorgroups,
+                  })
+
+
+@login_required
+def visitorgroup_new(request):
+    form = VisitorGroupForm()
+    return render(request, "home/visitorgroup_new.html", {
+                  'form': form,
+                  })

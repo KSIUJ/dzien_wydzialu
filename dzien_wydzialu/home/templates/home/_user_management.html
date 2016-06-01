@@ -1,0 +1,15 @@
+{% if user.is_authenticated %}
+<li>
+    <a href="{% url 'visitorgroup_index' %}">Twoje grupy</a>
+</li>
+<li>
+    <a href="{% url 'auth_logout' %}">Wyloguj</a>
+</li>
+{% else %}
+<li>
+    <a href="{% url 'auth_login' %}">Zaloguj</a>
+</li>
+<li>
+    <a href="{% url 'registration_register' %}">Zajerestruj</a>
+</li>
+{% endif %}
