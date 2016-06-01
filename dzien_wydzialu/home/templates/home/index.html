@@ -2,45 +2,18 @@
 {% load staticfiles %}
 
 {% block navbar %}
-<!-- Collect the nav links, forms, and other content for toggling -->
-<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Wróć do początku</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a class="page-scroll" href="#about">Dzień Otwarty 2017</a>
-        </li>
-        <li>
-            <a class="page-scroll" href="#services">Oferta</a>
-        </li>
-        <li>
-            <a class="page-scroll" href="{% url 'gallery' %}">Galeria</a>
-        </li>
-        <li>
-            <a class="page-scroll" href="#contact">Kontakt</a>
-        </li>
-		<li>
-			<a href="{% url 'registration_register' %}">Zajerestruj</a>
-		</li>
-		<li>
-			<a href="{% url 'auth_login' %}">Login</a>
-		</li>
-    </ul>
-</div>
-        </div>
-        <!-- /.container-fluid -->    
-    </nav>
-<!-- /.navbar-collapse -->
+<li>
+    <a class="page-scroll" href="#about">Dzień Otwarty 2017</a>
+</li>
+<li>
+    <a class="page-scroll" href="#services">Oferta</a>
+</li>
+<li>
+    <a class="page-scroll" href="{% url 'gallery' %}">Galeria</a>
+</li>
+<li>
+    <a class="page-scroll" href="#contact">Kontakt</a>
+</li>
 {% endblock %}
 {% block header %}
 <header>
@@ -48,8 +21,7 @@
     <div class="header-content-inner">
         <h1 style="color:#003366">Dzień Wydziału Matematyki i Informatyki Uniwersytetu Jagiellońskiego</h1>
         <hr>
-        <!-- we can add some information here beetwenn <p> </p>  in the future , if we want -->
-		<p>Witamy na naszej stronie! Dowiecie się tu wszystkiego na temat Dnia Otwartego Wydziału Matematyki i Informatyki Uniwersytetu Jagiellońskiego. </p> 
+        <p>Witamy na naszej stronie! Dowiecie się tu wszystkiego na temat Dnia Otwartego Wydziału Matematyki i Informatyki Uniwersytetu Jagiellońskiego. </p> 
 		 
         <a href="#about" class="btn btn-primary btn-xl page-scroll">Dowiedz się więcej</a>
     </div>
