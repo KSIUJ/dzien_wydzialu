@@ -11,11 +11,17 @@ class Room(models.Model):
     info = models.TextField(max_length=3000, blank=True)
     seats = models.PositiveSmallIntegerField()
 
+    def __str__(self):
+        return str(self.number)
+
 
 class Lecturer(models.Model):
     name = models.CharField(max_length=250)
     surname = models.CharField(max_length=250)
     degree = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name + ' ' + self.surname
 
 
 class Activity(models.Model):
@@ -27,6 +33,9 @@ class Activity(models.Model):
 
     class Meta:
         verbose_name_plural = "Activities"
+
+    def __str__(self):
+        return self.title
 
 
 class Group(models.Model):
@@ -64,7 +73,7 @@ class Profile(models.Model):
 
 
 class Image(models.Model):
-    image_file=models.ImageField(upload_to='images')
+    image_file = models.ImageField(upload_to='images')
 
 
 def user_registered_callback(sender, user, request, **kwargs):
@@ -74,6 +83,3 @@ def user_registered_callback(sender, user, request, **kwargs):
     profile.save()
 
 user_registered.connect(user_registered_callback)
-
-
-
