@@ -3,11 +3,14 @@ from django.contrib import admin
 from dzien_wydzialu.home import views
 from registration.backends.default.views import RegistrationView
 from dzien_wydzialu.home.forms import ExRegistrationForm
+from dzien_wydzialu.home.forms import ExAuthenticationForm
 
 accounts_patterns = [
     url(r'^register/$',
         RegistrationView.as_view(form_class=ExRegistrationForm),
         name='registration_register'),
+    url(r'^login/$', 'django.contrib.auth.views.login', {'authentication_form': ExAuthenticationForm},
+        name='auth_login'),
     url(r'^', include('registration.backends.default.urls')),
 ]
 
@@ -35,4 +38,5 @@ urlpatterns = [
         name='visitorgroup_assign'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(accounts_patterns)),
+
 ]
