@@ -11,7 +11,32 @@
 {% endblock navbar %}
 
 {% block content %}
-{% for visitorgroup in visitorgroups %}
-    {{ visitorgroup.id }}
-{% endfor %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Numer</th>
+                        <th>Profil</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                    {% for visitorgroup in visitorgroups %}
+                    <tr> 
+                        <td>{{ visitorgroup.id }}</td>
+                        <td>{{ visitorgroup.profile }}</td>
+                        <td>
+                            <button class="btn btn-primary" type="submit">Edytuj</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" type="submit">Usuń</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

@@ -30,6 +30,9 @@ urlpatterns = [
     url(r'^visitorgroup/new/$',
         views.visitorgroup_new,
         name='visitorgroup_new'),
+    url(r'^visitorgroup/assign/$',
+        views.visitorgroup_assign,
+        name='visitorgroup_assign'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(accounts_patterns)),
 ]

@@ -1,12 +1,13 @@
 from django.shortcuts import render
-from dzien_wydzialu.home.models import Group, Image
+from dzien_wydzialu.home.models import Group, Image, VisitorGroup
 from django.template.loader import get_template
 from django.template import RequestContext
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from dzien_wydzialu.home.forms import VisitorGroupForm
+from dzien_wydzialu.home.forms import VisitorGroupForm, AssignGroupForm
 
 from weasyprint import HTML, CSS
 
@@ -17,8 +18,10 @@ def index(request):
 
 def program(request):
     groups = Group.objects.all()
+    assignform = AssignGroupForm(queryset=VisitorGroup.objects.filter(caretaker=request.user))
     return render(request, "home/program.html", {
                   'groups': groups,
+                  'assignform': assignform,
                   })
 
 
@@ -54,7 +57,20 @@ def visitorgroup_index(request):
 
 @login_required
 def visitorgroup_new(request):
-    form = VisitorGroupForm()
+    if request.method == 'POST':
+        form = VisitorGroupForm(request.POST)
+        if form.is_valid():
+            visitorgroup = form.save(commit=False)
+            visitorgroup.caretaker = request.user
+            visitorgroup.save()
+            return HttpResponseRedirect(reverse('visitorgroup_index'))
+    else:
+        form = VisitorGroupForm()
     return render(request, "home/visitorgroup_new.html", {
                   'form': form,
                   })
+
+
+@login_required
+def visitorgroup_assign(request):
+    pass

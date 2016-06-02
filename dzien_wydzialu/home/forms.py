@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout, Fieldset, HTML
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
@@ -71,7 +72,25 @@ class VisitorGroupForm(forms.ModelForm):
         super(VisitorGroupForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'newVisitorGroupForm'
-        self.helper.form_class = 'blueForms'
         self.helper.form_method = 'post'
-        self.helper.form_action = 'submit_survey'
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.form_action = reverse('visitorgroup_new')
+        self.helper.add_input(Submit('submit', 'Wyślij'))
+
+
+class AssignGroupForm(forms.Form):
+    visitorgroup = forms.ModelChoiceField(queryset=VisitorGroup.objects.none(),
+                                          empty_label=None)
+
+    def __init__(self, *args, **kwargs):
+        queryset = kwargs.pop('queryset')
+        super(AssignGroupForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'assignGroup'
+        self.helper.form_method = 'post'
+        self.helper.form_action = reverse('visitorgroup_assign')
+        self.helper.layout = Layout(
+            'visitorgroup',
+            HTML('<input type="hidden" name="group" id="group" value="" />'),
+        )
+        self.helper.add_input(Submit('submit', 'Zapisz'))
+        self.fields['visitorgroup'].queryset = queryset

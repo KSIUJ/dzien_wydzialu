@@ -89,6 +89,7 @@ class VisitorGroup(models.Model):
     profile = models.CharField(max_length=100)
     info = models.TextField(max_length=3000, blank=True)
     caretaker = models.ForeignKey(User)
+    assigned_group = models.ForeignKey(Group, null=True)
 
     def __str__(self):
         return str(self.id)
