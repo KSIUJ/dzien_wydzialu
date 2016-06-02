@@ -1,86 +1,41 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block navbar_goback %}
+<a class="navbar-brand" href="{% url "home.views.index" %}">Strona główna</a>
+{% endblock navbar_goback %}
+
+{% block navbar %}
+{% endblock %}
+
+
 {% block content %}
-<section class="no-padding" id="gallery">
+<section id="gallery">
     <div class="container-fluid">
         <div class="row no-gutter">
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-        </div>
-        <div class="row no-gutter">
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
-            <div class="col-lg-2">
-                <a data-toggle="modal" data-target="#myModal">
-                    <img src={% static "img/Samples/1.jpg" %} class="img-responsive thumbnail" alt="">
-                </a>
-            </div>
+                {% for i in images %}
+                <div class="col-lg-2">
+                    <a data-toggle="modal" data-target="#myModal">
+                        <img src="{% static i.image_file.url %}" class="img-responsive thumbnail" alt="">
+                    </a>
+                </div>
+                {% endfor %}
         </div>
     </div>
+<!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Biblioteka</h4>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-        <img src={% static "img/Samples/1.jpg" %} class="img-responsive" alt="">
+        ...
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -89,8 +44,8 @@
 <style>
 .thumbnail {
     height: auto; 
-    width: auto; 
-    max-width: 300px; 
+    width: auto;
+    max-width: 220px; 
     max-height: 300px;
 }
 </style>

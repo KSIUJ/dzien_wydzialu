@@ -11,11 +11,17 @@ class Room(models.Model):
     info = models.TextField(max_length=3000, blank=True)
     seats = models.PositiveSmallIntegerField()
 
+    def __str__(self):
+        return str(self.number)
+
 
 class Lecturer(models.Model):
     name = models.CharField(max_length=250)
     surname = models.CharField(max_length=250)
     degree = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name + ' ' + self.surname
 
 
 class Activity(models.Model):
@@ -27,6 +33,9 @@ class Activity(models.Model):
 
     class Meta:
         verbose_name_plural = "Activities"
+
+    def __str__(self):
+        return self.title
 
 
 class Group(models.Model):
@@ -58,13 +67,14 @@ class Profile(models.Model):
     Coordinator = 'C'
     Roles = ((Teacher, 'Nauczyciel'),
              (Coordinator, 'Koordynator'))
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     school = models.ForeignKey(School)
     role = models.CharField(max_length=50, choices=Roles, default=Teacher)
 
 
 class Image(models.Model):
-    image_file=models.ImageField(upload_to='dzien_wydzialu/home/static/images')
+    name = models.CharField(max_length=25, blank=True)
+    image_file = models.ImageField(upload_to='images')
 
 
 def user_registered_callback(sender, user, request, **kwargs):
@@ -76,4 +86,11 @@ def user_registered_callback(sender, user, request, **kwargs):
 user_registered.connect(user_registered_callback)
 
 
+class VisitorGroup(models.Model):
+    profile = models.CharField(max_length=100)
+    info = models.TextField(max_length=3000, blank=True)
+    caretaker = models.ForeignKey(User)
+    assigned_group = models.ForeignKey(Group, null=True)
 
+    def __str__(self):
+        return str(self.id)

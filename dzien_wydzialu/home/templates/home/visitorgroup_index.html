@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block navbar_goback %}
+<a class="navbar-brand" href="{% url "home.views.index" %}">Strona główna</a>
+{% endblock navbar_goback %}
+
+{% block navbar %}
+<li>
+    <a href="{% url 'visitorgroup_new' %}">Nowa grupa</a>
+</li>
+{% endblock navbar %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Numer</th>
+                        <th>Profil</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                    {% for visitorgroup in visitorgroups %}
+                    <tr> 
+                        <td>{{ visitorgroup.id }}</td>
+                        <td>{{ visitorgroup.profile }}</td>
+                        <td>
+                            <button class="btn btn-primary" type="submit">Edytuj</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" type="submit">Usuń</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
