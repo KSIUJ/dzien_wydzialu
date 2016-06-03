@@ -77,9 +77,34 @@ def visitorgroup_new(request):
 def visitorgroup_assign(request):
     form = AssignGroupForm(request.POST,
                            queryset=VisitorGroup.objects.filter(caretaker=request.user))
-    print(request.POST)
     group = form.data['group']
     if form.is_valid():
         visitorgroup = form.cleaned_data['visitorgroup']
-        print(str(visitorgroup.pk) + " " + group)
+        group_to_assign = Group.objects.get(pk=group)
+        visitorgroup.assigned_group = group_to_assign
+        visitorgroup.save()
     return HttpResponseRedirect(reverse('visitorgroup_index'))
+
+
+@login_required
+def visitorgroup_delete(request, visitorgroup_id):
+    visitorgroup = VisitorGroup.objects.get(pk=visitorgroup_id)
+    visitorgroup.delete()
+    return HttpResponseRedirect(reverse('visitorgroup_index'))
+
+
+@login_required
+def visitorgroup_edit(request, visitorgroup_id):
+    visitorgroup = VisitorGroup.objects.get(pk=visitorgroup_id)
+    if request.method == 'POST':
+        form = VisitorGroupForm(request.POST, instance=visitorgroup)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('visitorgroup_index'))
+    else:
+        form = VisitorGroupForm(instance=visitorgroup)
+    form.helper.form_action = reverse('visitorgroup_edit',
+                                      args=[visitorgroup_id])
+    return render(request, "home/visitorgroup_edit.html", {
+                  'form': form,
+                  })
