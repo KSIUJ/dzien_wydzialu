@@ -92,3 +92,5 @@ ENV/
 
 # Vagrant
 .vagrant/
+
+dzien_wydzialu/home/static/images/
