@@ -38,5 +38,4 @@ urlpatterns = [
         name='visitorgroup_assign'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(accounts_patterns)),
-
 ]
