@@ -80,6 +80,7 @@ class VisitorGroupForm(forms.ModelForm):
 class AssignGroupForm(forms.Form):
     visitorgroup = forms.ModelChoiceField(queryset=VisitorGroup.objects.none(),
                                           empty_label=None)
+    # group = forms.IntegerField()
 
     def __init__(self, *args, **kwargs):
         queryset = kwargs.pop('queryset')
@@ -91,6 +92,8 @@ class AssignGroupForm(forms.Form):
         self.helper.layout = Layout(
             'visitorgroup',
             HTML('<input type="hidden" name="group" id="group" value="" />'),
+            # 'group'
         )
+        # self.fields['group'].widget = forms.HiddenInput
         self.helper.add_input(Submit('submit', 'Zapisz'))
         self.fields['visitorgroup'].queryset = queryset

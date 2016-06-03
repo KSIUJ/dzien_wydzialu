@@ -77,9 +77,9 @@ def visitorgroup_new(request):
 def visitorgroup_assign(request):
     form = AssignGroupForm(request.POST,
                            queryset=VisitorGroup.objects.filter(caretaker=request.user))
+    print(request.POST)
+    group = form.data['group']
     if form.is_valid():
-        print(request.POST)
         visitorgroup = form.cleaned_data['visitorgroup']
-        group = form.cleaned_data['group']
-        print(visitorgroup + " " + group)
+        print(str(visitorgroup.pk) + " " + group)
     return HttpResponseRedirect(reverse('visitorgroup_index'))

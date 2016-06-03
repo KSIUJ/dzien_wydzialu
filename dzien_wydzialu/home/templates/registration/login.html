@@ -2,21 +2,11 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
+{% block navbar_goback %}
+<a class="navbar-brand page-scroll" href="{% url "home.views.index" %}">Strona główna</a>
+{% endblock %}
 
 {% block navbar %}
-	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="{% url "home.views.index" %}">Strona główna</a>
-            </div>
-		</div>
-	</nav>
 {% endblock %}
 
 
