@@ -21,7 +21,7 @@
 
 
 {% block content %}
-<section>
+<section class="Rr">
 <div class='row'>
 <div class='col-sm-6 col-sm-offset-3'>
 <h1>Logowanie</h1>
@@ -42,9 +42,11 @@
 <p>{% trans "Nie masz konta" %}? <a href="{% url 'registration_register' %}">{% trans "Zarejestruj się" %}</a>!</p>
 </div>
 </div>
+    </section>
+
 
 {% endblock %}
-
+</div>
 
 {% comment %}
 **registration/login.html**
