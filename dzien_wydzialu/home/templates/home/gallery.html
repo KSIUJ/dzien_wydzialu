@@ -17,21 +17,29 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("a.grouped_elements").fancybox();
+        $("a.grouped_elements").fancybox({
+            'titleFromAlt' : true,
+            'titlePosition': 'over',
+
+        });
     });
 </script>
 {% endblock %}
 
 
 {% block content %}
-<section id="gallery">
-    <center>
-        {% for i in images %}
-            <a class="grouped_elements" rel="group1" href="{% static i.image_file.url %}"><img src="{% static i.image_file.url %}" height="200" width="300" alt="" /></a>
-        {% endfor %}
-        
-    </center>
-</section>
+   <section class="Ad">
+        <center>
+            {% for i in images %}
+            <a class="grouped_elements" rel="group1" href="{% static i.image_file.url %}">
+                <img src="{% static i.image_file.url %}" height="200" width="300" alt="{{i.name}}"/>
+            </a>
+            {% endfor %}
+
+        </center>
+    </section>
+
+
 
 
 {% endblock %}
