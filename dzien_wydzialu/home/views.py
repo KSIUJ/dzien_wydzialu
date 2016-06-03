@@ -71,6 +71,8 @@ def visitorgroup_new(request):
                   })
 
 
+@require_POST
 @login_required
 def visitorgroup_assign(request):
+    form = AssignGroupForm(request.POST)
     pass

@@ -28,7 +28,8 @@
                             <hr>
                         </div>
                     {% endfor %}
-                    <button id="{{  }}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Zapisz grupę</button>
+                    <button type="button" class="btn btn-primary vgroup" data-toggle="modal" data-target="#myModal">Zapisz grupę</button>
+                    <input type="hidden" value="{{ group.pk }}">
                 </div>
                 {% endfor %}
             </div>
@@ -53,8 +54,11 @@
   </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
-        alert($("#group").val())
+    $(".vgroup").click(function(){
+        var groupId = $(this).next().val();
+        // document.getElementsById('group').value = groupId;
+        $('#group').val(groupId);
+        alert($('#group').val());
     })
 </script>
 {% endblock %}
