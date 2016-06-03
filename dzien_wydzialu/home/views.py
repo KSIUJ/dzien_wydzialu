@@ -7,6 +7,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.views.decorators.http import require_POST
 from dzien_wydzialu.home.forms import VisitorGroupForm, AssignGroupForm
 
 from weasyprint import HTML, CSS
@@ -74,5 +75,11 @@ def visitorgroup_new(request):
 @require_POST
 @login_required
 def visitorgroup_assign(request):
-    form = AssignGroupForm(request.POST)
-    pass
+    form = AssignGroupForm(request.POST,
+                           queryset=VisitorGroup.objects.filter(caretaker=request.user))
+    if form.is_valid():
+        print(request.POST)
+        visitorgroup = form.cleaned_data['visitorgroup']
+        group = form.cleaned_data['group']
+        print(visitorgroup + " " + group)
+    return HttpResponseRedirect(reverse('visitorgroup_index'))
