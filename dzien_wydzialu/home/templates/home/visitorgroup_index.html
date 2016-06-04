@@ -23,6 +23,7 @@
                         <th>Numer</th>
                         <th>Profil</th>
                         <th>Grupa zajęciowa</th>
+                        <th>Wypisz</th>
                         <th>Edytuj</th>
                         <th>Usuń</th>
                     </tr>
@@ -30,10 +31,19 @@
                     <tr> 
                         <td>{{ visitorgroup.id }}</td>
                         <td>{{ visitorgroup.profile }}</td>
-                        <td>{{ visitorgroup.assigned_group }}</td>
+                        <td>
+                            {% if visitorgroup.assigned_group %}
+                                {{ visitorgroup.assigned_group }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
                         <td>
                             <a class="btn btn-primary" href="{% url 'visitorgroup_edit' visitorgroup.id %}">Edytuj</a>
                         </td>
+                        <td>
+                            <a href="{% url 'visitorgroup_unassign' visitorgroup.id %}" class="btn btn-warning">Wypisz</a>
+                            </td>
                         <td>
                             <a class="btn btn-danger" href="{% url 'visitorgroup_delete' visitorgroup.id %}">Usuń</a>
                         </td>

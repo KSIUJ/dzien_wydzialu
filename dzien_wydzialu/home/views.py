@@ -55,7 +55,7 @@ def get_group_pdf(request, group_id):
 
 @login_required
 def visitorgroup_index(request):
-    visitorgroups = request.user.visitorgroup_set.all()
+    visitorgroups = request.user.visitorgroup_set.all().order_by('id')
     return render(request, "home/visitorgroup_index.html", {
                   'visitorgroups': visitorgroups,
                   })
@@ -113,3 +113,11 @@ def visitorgroup_edit(request, visitorgroup_id):
     return render(request, "home/visitorgroup_edit.html", {
                   'form': form,
                   })
+
+
+@login_required
+def visitorgroup_unassign(request, visitorgroup_id):
+    visitorgroup = VisitorGroup.objects.get(pk=visitorgroup_id)
+    visitorgroup.assigned_group = None
+    visitorgroup.save()
+    return HttpResponseRedirect(reverse('visitorgroup_index'))

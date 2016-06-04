@@ -42,6 +42,9 @@ urlpatterns = [
     url(r'^visitorgroup/edit/(?P<visitorgroup_id>\d+)$',
         views.visitorgroup_edit,
         name='visitorgroup_edit'),
+    url(r'^visitorgroup/unassign/(?P<visitorgroup_id>\d+)$',
+        views.visitorgroup_unassign,
+        name='visitorgroup_unassign'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(accounts_patterns)),
 ]
