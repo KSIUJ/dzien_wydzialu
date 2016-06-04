@@ -1,5 +1,9 @@
 from django.contrib import admin
-from dzien_wydzialu.home.models import Room, Lecturer, Activity, Event, Group, School, Profile, Image
+from dzien_wydzialu.home.models import Room, Lecturer, Activity, Event, Group, School, Profile, Image, SurveyCode
+
+
+import string
+import random
 
 
 @admin.register(Room)
@@ -22,9 +26,28 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ('start_time', 'end_time', 'activity')
 
 
+def generate_survey_codes(modeladmin, request, queryset):
+    for group in queryset.all():
+        for code in group.surveycode_set.all():
+            code.delete()
+    for group in queryset.all():
+        for _ in range(20):
+            code = SurveyCode()
+            code.code = ''.join(
+                random.SystemRandom()
+                        .choice(string.ascii_uppercase +
+                                string.digits) for _ in range(8))
+            code.group = group
+            code.save()
+
+
+generate_survey_codes.short_description = "Generate survey codes for group"
+
+
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
     list_display = ['id']
+    actions = [generate_survey_codes]
 
 
 @admin.register(School)
@@ -34,9 +57,14 @@ class SchoolAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfilelAdmin(admin.ModelAdmin):
-    list_display = ('user','role', 'school')
+    list_display = ('user', 'role', 'school')
 
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
+
+
+@admin.register(SurveyCode)
+class SurveyCode(admin.ModelAdmin):
+    list_display = ('group', 'code', 'used')

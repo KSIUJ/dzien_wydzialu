@@ -97,3 +97,12 @@ class VisitorGroup(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+class SurveyCode(models.Model):
+    group = models.ForeignKey(Group)
+    code = models.CharField(max_length=8)
+    used = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.code
