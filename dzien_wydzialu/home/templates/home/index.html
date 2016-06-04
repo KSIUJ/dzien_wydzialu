@@ -14,15 +14,17 @@
 <li>
     <a class="page-scroll" href="#contact">Kontakt</a>
 </li>
+<li>
+    <a class="page-scroll" href="{% url 'program' %}">Program</a>
+</li>
 {% endblock %}
 {% block header %}
 <header>
 <div class="header-content">
-    <div class="header-content-inner">
-        <h1 style="color:#003366">Dzień Wydziału Matematyki i Informatyki Uniwersytetu Jagiellońskiego</h1>
-
-        </div>
-    <a href="#about" class="btn btn-primary btn-xl page-scroll">Dowiedz się więcej</a>
+    <div class="header-content-inner" style="height: 300px; margin-bottom: 140px">
+        <h1 style="color:#003366; margin-top: 150px">Dzień Wydziału Matematyki i Informatyki Uniwersytetu Jagiellońskiego</h1>
+    </div>
+    <a href="#about" style="margin-bottom: 200px; margin-top: 0px" class="btn btn-primary btn-xl page-scroll">Dowiedz się więcej</a>
 
 </div>
 </header>
@@ -35,7 +37,7 @@
                 <h2 class="section-heading">Dzień otwarty WMiI 2017!</h2>
                 <hr class="light">
                 <p class="text-faded">Drodzy uczniowie i nauczyciele. Z przyjemnością pragniemy zaprosić wszystkich zainteresowanych do udziału w dniu otwartym naszego wydziału, który odbędzie się 15 marca 2017 roku. Zachęcamy również do zapoznania się z ofertą warsztatów i wykładów jakie są zaplanowane dla uczestników. Liczymy każdy znajdzie coś dla siebie.</p>
-                <a href="{% url 'program' %}" class="page-scroll btn btn-default btn-xl">Zapoznaj się ze szczegółami!</a>
+                <a href="#services" class="page-scroll btn btn-default btn-xl">Sprawdź jakie atrakcje czekają na Ciebie!</a>
             </div>
         </div>
     </div>
@@ -56,44 +58,52 @@
                 <div class="service-box">
                     <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
                     <h3>Wykłady i warsztaty</h3>
-                    <p class="text-muted">Zapoznaj się z tematami wykładów i warsztatów jakie zostały przygotowane specjalnie na Dzień Otwarty.</p>
+                    <p class="text-muted">Dzień otwarty to wspaniała okazja do wzięcia udziału w wielu wykładach i warsztatach.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
                     <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
                     <h3>Wykładowcy</h3>
-                    <p class="text-muted">Dowiedz się więcej na temat pracowników naszego wydziału, którzy poprowadzą w tym roku zajęcia.</p>
+                    <p class="text-muted">To także okazja do spotkania z wykładowcami pracującymi na naszym wydziale.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
                     <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
-                    <h3>Lista sal</h3>
-                    <p class="text-muted">Plan wydziału oraz lista sal, w których odbędą się zajęcia.</p>
+                    <h3>Sale wykładowe</h3>
+                    <p class="text-muted">Uczestnicy mogą zwiedzić wydział a także skorzystać z wielu pracowni.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box">
                     <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
                     <h3>Dodatkowe atrakcje</h3>
-                    <p class="text-muted">Sprawdź co jeszcze przygotowaliśmy dla Ciebie!</p>
+                    <p class="text-muted">Przyjdź i sprawdź co jeszcze przygotowaliśmy dla Ciebie!</p>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 100px">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <center><a href="{% url 'program' %}" class="btn btn-primary btn-xl page-scroll">Zapoznaj się z planem dnia wydziału</a></center>
             </div>
         </div>
     </div>
 </section>
 
+
 <section class="no-padding" id="portfolio">
     <div class="container-fluid">
         <div class="row no-gutter">
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-3 col-sm-4">
                 <a class="portfolio-box">
                     <img src={% static "img/Samples/1.jpg" %} class="img-responsive" alt="">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
                             <div class="project-category text-faded">
-                                <h3>Biblioteka</h3>
+                                <h3>Biblioteka wydziałowa</h3>
                             </div>
                             <div class="project-name">
                                 
@@ -102,9 +112,54 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-3 col-sm-4">
                 <a  class="portfolio-box">
                     <img src={% static "img/Samples/2.jpg" %} class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                <h3>Interesujące wykłady</h3>
+                            </div>
+                            <div class="project-name">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-sm-4">
+                <a  class="portfolio-box">
+                    <img src={%static "img/Samples/3.jpg" %} class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                <h3>Ciekawe wydarzenia</h3>
+                            </div>
+                            <div class="project-name">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-sm-4">
+                <a  class="portfolio-box">
+                    <img src={% static "img/Samples/4.jpg" %} class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                <h3>Budynek wydziału</h3>
+                            </div>
+                            <div class="project-name">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-sm-4">
+                <a  class="portfolio-box">
+                    <img src={% static "img/Samples/5.jpg" %} class="img-responsive" alt="">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
                             <div class="project-category text-faded">
@@ -117,61 +172,46 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-sm-6">
-                <a  class="portfolio-box">
-                    <img src={%static "img/Samples/3.jpg" %} class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                <h3>Wydarzenia</h3>
-                            </div>
-                            <div class="project-name">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a  class="portfolio-box">
-                    <img src={% static "img/Samples/4.jpg" %} class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                <h3>Budynek</h3>
-                            </div>
-                            <div class="project-name">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a  class="portfolio-box">
-                    <img src={% static "img/Samples/5.jpg" %} class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                
-                            </div>
-                            <div class="project-name">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-3 col-sm-4">
                 <a  class="portfolio-box">
                     <img src={% static "img/Samples/6.jpg" %} class="img-responsive" alt="">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
                             <div class="project-category text-faded">
-                                <h3>Sławy UJ</h3>
+                                <h3>Spotkania z wybitnymi absolwentami</h3>
                             </div>
                             <div class="project-name">
-                                
+
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-sm-4">
+                <a  class="portfolio-box">
+                    <img src={% static "img/Samples/7.jpg" %} class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                <h3>Nowoczesny sprzęt</h3>
+                            </div>
+                            <div class="project-name">
+
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-sm-4">
+                <a  class="portfolio-box">
+                    <img src={%static "img/Samples/8.jpg" %} class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                <h3>Kampus UJ</h3>
+                            </div>
+                            <div class="project-name">
+
                             </div>
                         </div>
                     </div>
@@ -179,6 +219,6 @@
             </div>
         </div>
     </div>
-    <center><a href="{% url 'gallery' %}" class="btn btn-primary btn-xl page-scroll">Więcej zdjęć</a></center>
+    <center><a href="{% url 'gallery' %}" class="btn btn-primary btn-xl page-scroll">Przejdź do galerii</a></center>
 </section>
 {% endblock %}
