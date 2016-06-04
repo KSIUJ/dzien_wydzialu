@@ -33,7 +33,11 @@
                             <hr>
                         </div>
                     {% endfor %}
+                    {% if not group.assigned_group %}
                     <button type="button" class="btn btn-primary vgroup" data-toggle="modal" data-target="#myModal">Zapisz grupę</button>
+                    {% else %}
+                    <button type="button" class="btn btn-primary btn-disabled" data-toggle="modal" data-target="#myModal" disabled>Zajęta</button>
+                    {% endif %}
                     <input type="hidden" value="{{ group.pk }}">
                 </div>
                 {% endfor %}

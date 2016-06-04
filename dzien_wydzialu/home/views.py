@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from dzien_wydzialu.home.models import Group, Image, VisitorGroup
 from django.template.loader import get_template
@@ -19,7 +20,11 @@ def index(request):
 
 def program(request):
     groups = Group.objects.all()
-    assignform = AssignGroupForm(queryset=VisitorGroup.objects.filter(caretaker=request.user))
+    group_caretaker = Q(caretaker=request.user)
+    group_unassigned = Q(assigned_group=None)
+    assignform = AssignGroupForm(
+        queryset=VisitorGroup.objects.filter(group_caretaker &
+                                             group_unassigned))
     return render(request, "home/program.html", {
                   'groups': groups,
                   'assignform': assignform,
