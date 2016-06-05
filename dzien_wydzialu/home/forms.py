@@ -113,7 +113,7 @@ class AssignGroupForm(forms.Form):
         # self.fields['group'].widget = forms.HiddenInput
         self.helper.add_input(Submit('submit', 'Zapisz'))
         self.fields['visitorgroup'].queryset = queryset
-
+        self.fields['visitorgroup'].label = 'Wybierz grupe'
 
 class SurveyAccessForm(forms.Form):
     code = forms.CharField(max_length=8, min_length=8, label='Podaj kod otrzymany w trakcie Dnia Wydziału',error_messages = {'required': 'Podanie kodu jest wymagane',
@@ -144,6 +144,8 @@ class SurveyAnswerForm(forms.ModelForm):
         super(SurveyAnswerForm, self).__init__(*args, **kwargs)
         self.fields['group'].widget = forms.HiddenInput()
         self.fields['activity'].widget = forms.HiddenInput()
+        self.fields['answer'].required = False
+        self.fields['group'].error_messages = {'required': 'To pole jest wymagane!'}
         self.fields['answer'].error_messages = {'required': 'To pole jest wymagane!'}
 
 
