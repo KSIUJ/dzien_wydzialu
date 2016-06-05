@@ -24,11 +24,13 @@ def index(request):
 
 def program(request):
     groups = Group.objects.all()
-    group_caretaker = Q(caretaker=request.user)
-    group_unassigned = Q(assigned_group=None)
-    assignform = AssignGroupForm(
-        queryset=VisitorGroup.objects.filter(group_caretaker &
-                                             group_unassigned))
+    assignform = None
+    if request.user.is_authenticated():
+        group_caretaker = Q(caretaker=request.user)
+        group_unassigned = Q(assigned_group=None)
+        assignform = AssignGroupForm(
+            queryset=VisitorGroup.objects.filter(group_caretaker &
+                                                 group_unassigned))
     return render(request, "home/program.html", {
                   'groups': groups,
                   'assignform': assignform,
