@@ -140,7 +140,7 @@ def access_survey(request):
                 return HttpResponseRedirect(reverse(
                     'survey', args=[survey_code.group.id]))
             except:
-                form.add_error(None, "Code is invalid.")
+                form.add_error(None, "Kod nieprawidłowy.")
     else:
         form = SurveyAccessForm()
     return render(request, "home/access_survey.html", {

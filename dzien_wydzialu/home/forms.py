@@ -51,6 +51,13 @@ class ExRegistrationForm(RegistrationForm):
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].label = 'Imię'
+        self.fields['first_name'].error_messages = {'required': 'To pole jest wymagane!'}
+        self.fields['last_name'].label = 'Nazwisko'
+        self.fields['last_name'].error_messages = {'required': 'To pole jest wymagane!'}
+        self.fields['phone_number'].label = 'Numer telefonu'
+        self.fields['phone_number'].error_messages = {'required': 'To pole jest wymagane!',
+                                                      'invalid': 'Wprowadź same cyfry bez odstępów i innych znaków'}
         self.fields['school'].label = 'Szkoła'
         self.fields['school'].error_messages = {'required': 'To pole jest wymagane!'}
         self.fields['school'].help_text = 'Wybierz swoją szkołę z listy.'
@@ -107,7 +114,15 @@ class AssignGroupForm(forms.Form):
 
 
 class SurveyAccessForm(forms.Form):
-    code = forms.CharField(max_length=8, min_length=8)
+    code = forms.CharField(max_length=8, min_length=8, label='Podaj kod otrzymany w trakcie Dnia Wydziału',error_messages = {'required': 'Podanie kodu jest wymagane',
+                                              'invalid': 'Podany kod jest nieprawidłowy', 'min_length': 'Podany kod jest za krótki. Wprowadź 8 znaków.'})
+
+    error_messages = {
+        'invalid': _("Proszę wprowadzić prawidłową nazwę użytkownika i hasło."),
+        'inactive': _("To konto jest nieaktywne."),
+        'required': _("to jest wymagane")
+    }
+
 
     def __init__(self, *args, **kwargs):
         super(SurveyAccessForm, self).__init__(*args, **kwargs)
