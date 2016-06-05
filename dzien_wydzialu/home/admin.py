@@ -73,3 +73,5 @@ class SurveyCodeAdmin(admin.ModelAdmin):
 @admin.register(SurveyAnswer)
 class SurveyAnswerAdmin(admin.ModelAdmin):
     list_display = ('activity', 'group', 'answer')
+    ordering = ['activity']
+    list_filter = ['activity']
