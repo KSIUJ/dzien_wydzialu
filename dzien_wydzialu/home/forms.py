@@ -84,6 +84,8 @@ class VisitorGroupForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(VisitorGroupForm, self).__init__(*args, **kwargs)
+        self.fields['profile'].label = 'Profil klasy'
+        self.fields['info'].label = 'Informacje na temat grupy'
         self.helper = FormHelper()
         self.helper.form_id = 'newVisitorGroupForm'
         self.helper.form_method = 'post'
@@ -142,6 +144,7 @@ class SurveyAnswerForm(forms.ModelForm):
         super(SurveyAnswerForm, self).__init__(*args, **kwargs)
         self.fields['group'].widget = forms.HiddenInput()
         self.fields['activity'].widget = forms.HiddenInput()
+        self.fields['answer'].error_messages = {'required': 'To pole jest wymagane!'}
 
 
 class SurveyAnswerFormsetHelper(FormHelper):
