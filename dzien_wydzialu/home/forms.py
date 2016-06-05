@@ -29,9 +29,16 @@ class ExAuthenticationForm(AuthenticationForm):
         'required': _("to jest wymagane")
     }
 
+
 class ExRegistrationForm(RegistrationForm):
-    school = forms.ModelChoiceField(queryset = School.objects.all())
-    #overwrited method for password check
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'label': 'first_name'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'label': 'last_name'}))
+    school = forms.ModelChoiceField(queryset=School.objects.all())
+    phone_number = forms.RegexField(regex=r'^\+?1?\d{9,15}$',
+                                error_message=("Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."))
+
+    # overwrited method for password check
+
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")

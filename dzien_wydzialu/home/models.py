@@ -70,6 +70,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     school = models.ForeignKey(School)
     role = models.CharField(max_length=50, choices=Roles, default=Teacher)
+    phone_number = models.CharField(max_length=15)
 
 
 class Image(models.Model):
@@ -81,7 +82,14 @@ def user_registered_callback(sender, user, request, **kwargs):
     profile = Profile(user=user)
     school_id = request.POST.get('school')
     profile.school = School.objects.get(pk=school_id)
+    phone_number = request.POST.get('phone_number')
+    profile.phone_number = phone_number
     profile.save()
+    first_name = request.POST.get('first_name')
+    user.first_name = first_name
+    last_name = request.POST.get('last_name')
+    user.last_name = last_name
+    user.save()
 
 user_registered.connect(user_registered_callback)
 
@@ -114,4 +122,4 @@ class SurveyAnswer(models.Model):
     answer = models.TextField(max_length=3000)
 
     def __str__(self):
-        return self.activity.title + "_" + self.group
+        return self.activity.title + "_" + str(self.group)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from dzien_wydzialu.home.models import Room, Lecturer, Activity, Event, Group, School, Profile, Image, SurveyCode
+from dzien_wydzialu.home.models import Room, Lecturer, Activity, Event, Group, School, Profile, Image, SurveyCode, SurveyAnswer
 
 
 import string
@@ -66,5 +66,10 @@ class ImageAdmin(admin.ModelAdmin):
 
 
 @admin.register(SurveyCode)
-class SurveyCode(admin.ModelAdmin):
+class SurveyCodeAdmin(admin.ModelAdmin):
     list_display = ('group', 'code', 'used')
+
+
+@admin.register(SurveyAnswer)
+class SurveyAnswerAdmin(admin.ModelAdmin):
+    list_display = ('activity', 'group', 'answer')
