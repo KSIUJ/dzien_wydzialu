@@ -106,3 +106,12 @@ class SurveyCode(models.Model):
 
     def __str__(self):
         return self.code
+
+
+class SurveyAnswer(models.Model):
+    activity = models.ForeignKey(Activity)
+    group = models.ForeignKey(Group)
+    answer = models.TextField(max_length=3000)
+
+    def __str__(self):
+        return self.activity.title + "_" + self.group

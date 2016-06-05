@@ -9,7 +9,11 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.views.decorators.http import require_POST
-from dzien_wydzialu.home.forms import VisitorGroupForm, AssignGroupForm
+from django.forms.models import formset_factory
+from dzien_wydzialu.home.forms import VisitorGroupForm, AssignGroupForm, SurveyAccessForm, SurveyAnswerForm, SurveyAnswerFormsetHelper
+from dzien_wydzialu.home.models import SurveyCode
+from functools import partial, wraps
+
 
 from weasyprint import HTML, CSS
 
@@ -121,3 +125,66 @@ def visitorgroup_unassign(request, visitorgroup_id):
     visitorgroup.assigned_group = None
     visitorgroup.save()
     return HttpResponseRedirect(reverse('visitorgroup_index'))
+
+
+def access_survey(request):
+    if request.method == 'POST':
+        form = SurveyAccessForm(request.POST)
+        if form.is_valid():
+            code = form.cleaned_data['code']
+            try:
+                survey_code = SurveyCode.objects.get(code=code)
+                request.session['survey_code'] = survey_code.code
+                return HttpResponseRedirect(reverse(
+                    'survey', args=[survey_code.group.id]))
+            except:
+                form.add_error(None, "Code is invalid.")
+    else:
+        form = SurveyAccessForm()
+    return render(request, "home/access_survey.html", {
+                  'form': form,
+                  })
+
+
+def survey(request, group_id):
+    code = request.session.get('survey_code', None)
+    valid = False
+    if code:
+        try:
+            survey_code = SurveyCode.objects.get(code=code)
+            valid = True
+        except:
+            pass
+    if not valid:
+        return HttpResponseRedirect(reverse('access_survey'))
+
+    group = Group.objects.get(pk=group_id)
+    SurveyFormset = formset_factory(SurveyAnswerForm, extra=0)
+    if request.method == 'POST':
+        formset = SurveyFormset(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                form.save()
+            try:
+                del request.session['survey_code']
+            except KeyError:
+                pass
+            survey_code.used = True
+            survey_code.save()
+            return HttpResponseRedirect(reverse('survey_thankyou'))
+    else:
+        initial = []
+        for event in group.event_set.all():
+            initial.append({'group': group, 'activity': event.activity})
+        formset = SurveyFormset(initial=initial)
+        for form in formset:
+            form.fields['answer'].label = form.initial['activity'].title
+    formset_helper = SurveyAnswerFormsetHelper(group_id=group_id)
+    return render(request, "home/survey.html", {
+                  'formset': formset,
+                  'formset_helper': formset_helper,
+                  })
+
+
+def survey_thankyou(request):
+    return render(request, "home/survey_thankyou.html", {})

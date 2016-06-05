@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
-from dzien_wydzialu.home.models import School, VisitorGroup
+from dzien_wydzialu.home.models import School, VisitorGroup, SurveyAnswer
 from registration.forms import RegistrationForm
 
 
@@ -97,3 +97,36 @@ class AssignGroupForm(forms.Form):
         # self.fields['group'].widget = forms.HiddenInput
         self.helper.add_input(Submit('submit', 'Zapisz'))
         self.fields['visitorgroup'].queryset = queryset
+
+
+class SurveyAccessForm(forms.Form):
+    code = forms.CharField(max_length=8, min_length=8)
+
+    def __init__(self, *args, **kwargs):
+        super(SurveyAccessForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'accessSurvey'
+        self.helper.form_method = 'post'
+        self.helper.form_action = reverse('access_survey')
+        self.helper.add_input(Submit('submit', 'Wyślij'))
+
+
+class SurveyAnswerForm(forms.ModelForm):
+    class Meta:
+        model = SurveyAnswer
+        fields = ['answer', 'group', 'activity']
+
+    def __init__(self, *args, **kwargs):
+        super(SurveyAnswerForm, self).__init__(*args, **kwargs)
+        self.fields['group'].widget = forms.HiddenInput()
+        self.fields['activity'].widget = forms.HiddenInput()
+
+
+class SurveyAnswerFormsetHelper(FormHelper):
+    def __init__(self, *args, **kwargs):
+        group_id = kwargs.pop('group_id')
+        super(SurveyAnswerFormsetHelper, self).__init__(*args, **kwargs)
+        self.form_id = 'survey'
+        self.form_method = 'post'
+        self.form_action = reverse('survey', args=[group_id])
+        self.add_input(Submit('submit', 'Wyślij'))
