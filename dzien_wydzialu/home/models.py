@@ -19,6 +19,7 @@ class Lecturer(models.Model):
     name = models.CharField(max_length=250)
     surname = models.CharField(max_length=250)
     degree = models.CharField(max_length=250)
+    info = models.TextField()
 
     def __str__(self):
         return self.name + ' ' + self.surname
@@ -27,7 +28,7 @@ class Lecturer(models.Model):
 class Activity(models.Model):
     title = models.CharField(max_length=250)
     is_lecture = models.BooleanField()
-    lecturer = models.ManyToManyField(Lecturer)
+    lecturers = models.ManyToManyField(Lecturer)
     room = models.ForeignKey(Room)
     description = models.TextField(max_length=3000)
 

@@ -28,7 +28,9 @@
                     <hr>
                     {% for event in group.event_set.all %}
                         <div>
-                            <h4>{{ event.activity.title }}</h4>
+                            <a href="{% url 'activity_detail' event.activity.id %}">
+                                <h4>{{ event.activity.title }}</h4>
+                            </a>
                             {{ event.start_time }} - {{ event.end_time }} <br>
                             <hr>
                         </div>

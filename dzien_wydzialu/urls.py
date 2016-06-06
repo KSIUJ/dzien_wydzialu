@@ -54,6 +54,12 @@ urlpatterns = [
     url(r'^survey/thankyou$',
         views.survey_thankyou,
         name='survey_thankyou'),
+    url(r'^activity/(?P<activity_id>\d+)$',
+        views.activity_detail,
+        name='activity_detail'),
+    url(r'^lecturer/(?P<lecturer_id>\d+)$',
+        views.lecturer_detail,
+        name='lecturer_detail'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(accounts_patterns)),
 ]

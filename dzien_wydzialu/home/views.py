@@ -11,7 +11,7 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.views.decorators.http import require_POST
 from django.forms.models import formset_factory
 from dzien_wydzialu.home.forms import VisitorGroupForm, AssignGroupForm, SurveyAccessForm, SurveyAnswerForm, SurveyAnswerFormsetHelper
-from dzien_wydzialu.home.models import SurveyCode
+from dzien_wydzialu.home.models import SurveyCode, Activity, Lecturer
 from functools import partial, wraps
 
 
@@ -136,11 +136,13 @@ def access_survey(request):
             code = form.cleaned_data['code']
             try:
                 survey_code = SurveyCode.objects.get(code=code)
+                if survey_code.used:
+                    raise "used"
                 request.session['survey_code'] = survey_code.code
                 return HttpResponseRedirect(reverse(
                     'survey', args=[survey_code.group.id]))
             except:
-                form.add_error(None, "Kod nieprawidłowy.")
+                form.add_error(None, "Kod jest nieprawidłowy lub został już wykorzystany.")
     else:
         form = SurveyAccessForm()
     return render(request, "home/access_survey.html", {
@@ -190,3 +192,17 @@ def survey(request, group_id):
 
 def survey_thankyou(request):
     return render(request, "home/survey_thankyou.html", {})
+
+
+def activity_detail(request, activity_id):
+    activity = Activity.objects.get(pk=activity_id)
+    return render(request, "home/activity_detail.html", {
+                  'activity': activity,
+                  })
+
+
+def lecturer_detail(request, lecturer_id):
+    lecturer = Lecturer.objects.get(pk=lecturer_id)
+    return render(request, "home/lecturer_detail.html", {
+                  'lecturer': lecturer,
+                  })

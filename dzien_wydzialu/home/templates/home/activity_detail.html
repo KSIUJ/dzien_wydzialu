@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block navbar_goback %}
+<a class="navbar-brand" href="{% url 'program' %}">Program</a>
+{% endblock navbar_goback %}
+
+{% block content %}
+<section class="Ad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>{{ activity.title }}
+                    <div style="margin: 10px 0px 40px 0px">
+                        <small class="pull-left">
+                        {% for lecturer in activity.lecturers.all %}
+                            <a href="{% url 'lecturer_detail' lecturer.id %}">{{ lecturer }}</a>
+                        {% endfor %}
+                        </small>
+                        <small class="pull-right">Sala {{ activity.room }}</small>
+                    </div>
+                </h2>
+                <div class="clearfix"></div>
+                <p class="text-justify">
+                    {{ activity.description }}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

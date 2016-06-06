@@ -1,6 +1,6 @@
 from django.contrib import admin
-from dzien_wydzialu.home.models import Room, Lecturer, Activity, Event, Group, School, Profile, Image, SurveyCode, SurveyAnswer
-
+from dzien_wydzialu.home.models import Room, Lecturer, Activity, Event, Group, School, Profile, Image, SurveyCode, SurveyAnswer, User
+from django.contrib.auth.admin import UserAdmin
 
 import string
 import random
@@ -57,7 +57,7 @@ class SchoolAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfilelAdmin(admin.ModelAdmin):
-    list_display = ('user', 'role', 'school')
+    list_display = ('user', 'role', 'school', 'phone_number')
 
 
 @admin.register(Image)
@@ -75,3 +75,19 @@ class SurveyAnswerAdmin(admin.ModelAdmin):
     list_display = ('activity', 'group', 'answer')
     ordering = ['activity']
     list_filter = ['activity']
+
+
+class UserAdmin(UserAdmin):
+    list_display = ['username', 'first_name', 'last_name', 'is_staff', 'phone']
+
+    def phone(self, obj):
+        try:
+            phone = obj.profile.phone_number
+            return phone
+        except:
+            return ""
+
+    phone.short_description = 'Phone'
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
